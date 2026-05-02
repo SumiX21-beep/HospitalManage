@@ -88,7 +88,7 @@ router.post('/doctor/signup', async (req, res) => {
       experience,
       hospital,
       address,
-      isApproved: false
+      isApproved: true
     });
 
     await doctor.save();

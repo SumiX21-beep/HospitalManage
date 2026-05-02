@@ -78,15 +78,19 @@ const AppRoutes = () => {
         </PrivateRoute>
       }>
         <Route index element={<DoctorDashboard />} />
+        <Route path="*" element={<DoctorDashboard />} />
       </Route>
-      
+
       <Route path="/admin" element={
         <PrivateRoute allowedRoles={['admin']}>
           <AdminLayout />
         </PrivateRoute>
       }>
         <Route index element={<AdminDashboard />} />
+        <Route path="*" element={<AdminDashboard />} />
       </Route>
+
+      <Route path="*" element={<Navigate to={user ? homeForRole(user.role) : '/login'} replace />} />
     </Routes>
   );
 };
