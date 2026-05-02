@@ -4,7 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const QRCode = require('qrcode');
 const { auth, authorize } = require('../middleware/auth');
-const { Patient, MedicalRecord, Appointment } = require('../models');
+const { Patient, Doctor, MedicalRecord, Appointment } = require('../models');
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -187,6 +187,17 @@ router.get('/health-summary', auth, authorize('patient'), async (req, res) => {
     }
 
     res.json({ analysis, records });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// List approved doctors (for patient appointment booking)
+router.get('/doctors', auth, authorize('patient'), async (req, res) => {
+  try {
+    const doctors = await Doctor.find({ isApproved: true })
+      .select('name specialization hospital qualification experience');
+    res.json(doctors);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

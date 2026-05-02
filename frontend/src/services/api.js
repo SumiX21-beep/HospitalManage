@@ -23,6 +23,7 @@ export const patientAPI = {
   symptomChecker: (symptoms) => axios.post(`${API_URL}/patient/symptom-checker`, { symptoms }),
   getTimeline: () => axios.get(`${API_URL}/patient/timeline`),
   getAnalytics: () => axios.get(`${API_URL}/patient/analytics`),
+  getDoctors: () => axios.get(`${API_URL}/patient/doctors`),
 };
 
 // Doctor API

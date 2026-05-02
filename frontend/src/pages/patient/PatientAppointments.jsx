@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { patientAPI } from '../../services/api';
-import axios from 'axios';
 
 const PatientAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -17,7 +16,7 @@ const PatientAppointments = () => {
     try {
       const [aptRes, docRes] = await Promise.all([
         patientAPI.getAppointments(),
-        axios.get('/api/doctor/patients')
+        patientAPI.getDoctors()
       ]);
       setAppointments(aptRes.data);
       setDoctors(docRes.data);
