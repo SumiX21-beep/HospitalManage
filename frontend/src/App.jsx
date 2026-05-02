@@ -11,7 +11,15 @@ import SymptomChecker from './pages/patient/SymptomChecker';
 import MedicalTimeline from './pages/patient/MedicalTimeline';
 import HealthAnalytics from './pages/patient/HealthAnalytics';
 import DoctorDashboard from './pages/doctor/DoctorDashboard';
+import DoctorPatients from './pages/doctor/DoctorPatients';
+import DoctorPatientDetail from './pages/doctor/DoctorPatientDetail';
+import DoctorAppointments from './pages/doctor/DoctorAppointments';
+import DoctorAddRecord from './pages/doctor/DoctorAddRecord';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminDoctors from './pages/admin/AdminDoctors';
+import AdminPatients from './pages/admin/AdminPatients';
+import AdminAppointments from './pages/admin/AdminAppointments';
+import AdminPending from './pages/admin/AdminPending';
 import PatientLayout from './layouts/PatientLayout';
 import DoctorLayout from './layouts/DoctorLayout';
 import AdminLayout from './layouts/AdminLayout';
@@ -78,6 +86,10 @@ const AppRoutes = () => {
         </PrivateRoute>
       }>
         <Route index element={<DoctorDashboard />} />
+        <Route path="patients" element={<DoctorPatients />} />
+        <Route path="patients/:id" element={<DoctorPatientDetail />} />
+        <Route path="appointments" element={<DoctorAppointments />} />
+        <Route path="add-record" element={<DoctorAddRecord />} />
         <Route path="*" element={<DoctorDashboard />} />
       </Route>
 
@@ -87,6 +99,10 @@ const AppRoutes = () => {
         </PrivateRoute>
       }>
         <Route index element={<AdminDashboard />} />
+        <Route path="doctors" element={<AdminDoctors />} />
+        <Route path="patients" element={<AdminPatients />} />
+        <Route path="appointments" element={<AdminAppointments />} />
+        <Route path="pending" element={<AdminPending />} />
         <Route path="*" element={<AdminDashboard />} />
       </Route>
 
