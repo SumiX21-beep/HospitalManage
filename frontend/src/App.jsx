@@ -16,6 +16,9 @@ import PatientLayout from './layouts/PatientLayout';
 import DoctorLayout from './layouts/DoctorLayout';
 import AdminLayout from './layouts/AdminLayout';
 
+const homeForRole = (role) =>
+  role === 'doctor' ? '/doctor' : role === 'admin' ? '/admin' : '/';
+
 const PrivateRoute = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth();
 
@@ -28,11 +31,11 @@ const PrivateRoute = ({ children, allowedRoles }) => {
   }
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
-    return <Navigate to="/" />;
+    return <Navigate to={homeForRole(user.role)} replace />;
   }
 
   return children;
@@ -43,8 +46,8 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-      <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
+      <Route path="/login" element={user ? <Navigate to={homeForRole(user.role)} replace /> : <Login />} />
+      <Route path="/signup" element={user ? <Navigate to={homeForRole(user.role)} replace /> : <Signup />} />
       
       <Route path="/" element={
         <PrivateRoute allowedRoles={['patient']}>
